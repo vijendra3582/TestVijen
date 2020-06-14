@@ -21,7 +21,7 @@ class Controller extends BaseController
     
     public function taskOne(){
         // Categroies with sub_category and child_category using relation
-        $categories = Category::with('subCategory')->get()->toArray();
+        $categories = Category::with('subCategory')->where('parent_id', 0)->get()->toArray();
         
         // If you want to make tree using recursion function then uncomment below two lines
         // $categoriesAll = Category::get()->toArray();
