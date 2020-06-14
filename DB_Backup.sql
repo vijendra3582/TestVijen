@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 13, 2020 at 10:47 AM
+-- Generation Time: Jun 14, 2020 at 05:48 AM
 -- Server version: 5.6.47-cll-lve
 -- PHP Version: 7.2.7
 
@@ -25,6 +25,45 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `attributes`
+--
+
+CREATE TABLE `attributes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `attributes`
+--
+
+INSERT INTO `attributes` (`id`, `name`) VALUES
+(1, 'Color'),
+(2, 'Size');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attribute_values`
+--
+
+CREATE TABLE `attribute_values` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `attribute_id` bigint(20) UNSIGNED NOT NULL,
+  `value` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `attribute_values`
+--
+
+INSERT INTO `attribute_values` (`id`, `attribute_id`, `value`) VALUES
+(1, 1, 'Black'),
+(2, 1, 'White');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `categories`
 --
 
@@ -32,25 +71,23 @@ CREATE TABLE `categories` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `parent_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `categories`
 --
 
-INSERT INTO `categories` (`id`, `name`, `parent_id`, `slug`, `created_at`, `updated_at`) VALUES
-(1, 'Women', '0', 'women', '2020-06-13 05:45:07', '2020-06-13 05:45:07'),
-(2, 'Clothes', '1', 'women-clothes', '2020-06-13 05:45:07', '2020-06-13 05:45:07'),
-(3, 'Footwear', '1', 'women-footwear', '2020-06-13 05:45:07', '2020-06-13 05:45:07'),
-(4, 'Shoes', '3', 'women-footwear-shoes', '2020-06-13 05:45:07', '2020-06-13 05:45:07'),
-(7, 'Men', '0', 'men', '2020-06-13 05:45:07', '2020-06-13 05:45:07'),
-(8, 'Clothes', '7', 'men-clothes', '2020-06-13 05:45:07', '2020-06-13 05:45:07'),
-(9, 'Footwear', '7', 'men-footwear', '2020-06-13 05:45:07', '2020-06-13 05:45:07'),
-(10, 'Kids', '0', 'kids', '2020-06-13 05:45:07', '2020-06-13 05:45:07'),
-(11, 'Electronics', '0', 'electronic', '2020-06-13 05:45:07', '2020-06-13 05:45:07');
+INSERT INTO `categories` (`id`, `name`, `parent_id`, `slug`) VALUES
+(1, 'Women', '0', 'women'),
+(2, 'Clothes', '1', 'women-clothes'),
+(3, 'Footwear', '1', 'women-footwear'),
+(4, 'Shoes', '3', 'women-footwear-shoes'),
+(7, 'Men', '0', 'men'),
+(8, 'Clothes', '7', 'men-clothes'),
+(9, 'Footwear', '7', 'men-footwear'),
+(10, 'Kids', '0', 'kids'),
+(11, 'Electronics', '0', 'electronic');
 
 -- --------------------------------------------------------
 
@@ -75,19 +112,17 @@ CREATE TABLE `failed_jobs` (
 
 CREATE TABLE `features` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `features`
 --
 
-INSERT INTO `features` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'Power Source', '2020-06-13 08:55:37', '2020-06-13 08:55:37'),
-(2, 'Battery Type', '2020-06-13 08:55:37', '2020-06-13 08:55:37'),
-(3, 'Battery Run Time', '2020-06-13 08:55:37', '2020-06-13 08:55:37');
+INSERT INTO `features` (`id`, `name`) VALUES
+(1, 'Power Source'),
+(2, 'Battery Type'),
+(3, 'Battery Run Time');
 
 -- --------------------------------------------------------
 
@@ -98,19 +133,17 @@ INSERT INTO `features` (`id`, `name`, `created_at`, `updated_at`) VALUES
 CREATE TABLE `feature_values` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `feature_id` bigint(20) UNSIGNED NOT NULL,
-  `value` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `value` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `feature_values`
 --
 
-INSERT INTO `feature_values` (`id`, `feature_id`, `value`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Battery', '2020-06-13 08:55:51', '2020-06-13 08:55:51'),
-(2, 1, 'Ni-MH Battery', '2020-06-13 08:55:51', '2020-06-13 08:55:51'),
-(3, 1, '90 Min', '2020-06-13 08:55:51', '2020-06-13 08:55:51');
+INSERT INTO `feature_values` (`id`, `feature_id`, `value`) VALUES
+(1, 1, 'Battery'),
+(2, 1, 'Ni-MH Battery'),
+(3, 1, '90 Min');
 
 -- --------------------------------------------------------
 
@@ -139,7 +172,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (15, '2020_06_13_083543_create_specification_values_table', 2),
 (14, '2020_06_13_083532_create_specifications_table', 2),
 (13, '2020_06_13_083509_create_feature_values_table', 2),
-(12, '2020_06_13_083333_create_features_table', 2);
+(12, '2020_06_13_083333_create_features_table', 2),
+(16, '2020_06_14_044327_create_attributes_table', 3),
+(17, '2020_06_14_044444_create_attribute_values_table', 3),
+(18, '2020_06_14_044842_create_product_attributes_table', 4);
 
 -- --------------------------------------------------------
 
@@ -167,7 +203,6 @@ CREATE TABLE `products` (
   `slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `image` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `currency` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `price` float NOT NULL,
   `seller` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `is_active` tinyint(4) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -178,8 +213,30 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `title`, `description`, `category_id`, `slug`, `image`, `currency`, `price`, `seller`, `is_active`, `created_at`, `updated_at`) VALUES
-(1, 'Nova Prime Series NHT 1090 Turbo Power Runtime: 90 min Trimmer for Men  (Black)\r\n', 'Facial hair is a prominent feature of a man\'s face and it needs to be groomed regularly if you want to maintain a suave image. Helping you do this is this Nova trimmer. It comes with 20 trim settings which let you trim and style your facial hair. This beard trimmer comes with 20 length settings that range from 0.25 mm to 8.5 mm making it very useful no matter whether you want to maintain a clean-shaven look or a neat beard. The trimmer is designed with Turbo power which runs for 90 min on one charge backed with titanium coated blades that provide a superior cutting performance. Whats more it comes with quick lightning charge option , which can be used both corded and cordless use. Long Lasting & Durable -This trimmer is designed to offer you long lasting performance and comes with a 2-year international guarantee .Dynamic Beard System- The unique feature in this trimmer allows you to achieve the beard style that you want - 3-day shadow, short beard or full beard look. The trimmer has an integrated hair lift comb that lifts the hair up to the level of the blade, resulting in an even and close trim.Integrated Hair Lift Comb The comb allows you to quickly trim your facial hair while remaining gentle on the skin. It also guides every hair strand to the level of the blades, ensuring an effortless and even trimming.Faster Trimming -Whether you are running late for office or not, you can enjoy quick trim thanks to the double sharpened full metal blades that cut more hair in each pass.Effortless Trimming Using the zoom wheel on the handle, you can adjust and lock-in the desired length you need for trimming. The length is between 0.25 mm and 8.5 mm with 0.25 mm precision.Skin-friendly Blades The trimmer is fitted with extra-sharp blades that have rounded tips to ensure a smooth contact with the skin. The design prevents chafing and skin irritation while ensuring you have a neat and close trim always.', 11, 'nova-prime-series-nht-1090-turbo-power-runtime-90-min-trimmer-men', 'uploads/product-1.jpg', 'INR', 1499, 'Amazestore', 1, '2020-06-13 12:12:30', '2020-06-13 17:15:38');
+INSERT INTO `products` (`id`, `title`, `description`, `category_id`, `slug`, `image`, `currency`, `seller`, `is_active`, `created_at`, `updated_at`) VALUES
+(1, 'Nova Prime Series NHT 1090 Turbo Power Runtime: 90 min Trimmer for Men  (Black)\r\n', 'Facial hair is a prominent feature of a man\'s face and it needs to be groomed regularly if you want to maintain a suave image. Helping you do this is this Nova trimmer. It comes with 20 trim settings which let you trim and style your facial hair. This beard trimmer comes with 20 length settings that range from 0.25 mm to 8.5 mm making it very useful no matter whether you want to maintain a clean-shaven look or a neat beard. The trimmer is designed with Turbo power which runs for 90 min on one charge backed with titanium coated blades that provide a superior cutting performance. Whats more it comes with quick lightning charge option , which can be used both corded and cordless use. Long Lasting & Durable -This trimmer is designed to offer you long lasting performance and comes with a 2-year international guarantee .Dynamic Beard System- The unique feature in this trimmer allows you to achieve the beard style that you want - 3-day shadow, short beard or full beard look. The trimmer has an integrated hair lift comb that lifts the hair up to the level of the blade, resulting in an even and close trim.Integrated Hair Lift Comb The comb allows you to quickly trim your facial hair while remaining gentle on the skin. It also guides every hair strand to the level of the blades, ensuring an effortless and even trimming.Faster Trimming -Whether you are running late for office or not, you can enjoy quick trim thanks to the double sharpened full metal blades that cut more hair in each pass.Effortless Trimming Using the zoom wheel on the handle, you can adjust and lock-in the desired length you need for trimming. The length is between 0.25 mm and 8.5 mm with 0.25 mm precision.Skin-friendly Blades The trimmer is fitted with extra-sharp blades that have rounded tips to ensure a smooth contact with the skin. The design prevents chafing and skin irritation while ensuring you have a neat and close trim always.', 11, 'nova-prime-series-nht-1090-turbo-power-runtime-90-min-trimmer-men', 'uploads/product-1.jpg', 'INR', 'Amazestore', 1, '2020-06-13 12:12:30', '2020-06-13 17:15:38');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_attributes`
+--
+
+CREATE TABLE `product_attributes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `product_id` bigint(20) UNSIGNED NOT NULL,
+  `key` bigint(20) UNSIGNED NOT NULL,
+  `value` bigint(20) UNSIGNED NOT NULL,
+  `price` double(8,2) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `product_attributes`
+--
+
+INSERT INTO `product_attributes` (`id`, `product_id`, `key`, `value`, `price`) VALUES
+(1, 1, 1, 1, 100.00),
+(2, 1, 1, 2, 110.00);
 
 -- --------------------------------------------------------
 
@@ -190,20 +247,18 @@ INSERT INTO `products` (`id`, `title`, `description`, `category_id`, `slug`, `im
 CREATE TABLE `product_features` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `product_id` bigint(20) UNSIGNED NOT NULL,
-  `key` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `value` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `key` bigint(20) UNSIGNED NOT NULL,
+  `value` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `product_features`
 --
 
-INSERT INTO `product_features` (`id`, `product_id`, `key`, `value`, `created_at`, `updated_at`) VALUES
-(1, 1, '1', '1', '2020-06-13 08:56:14', '2020-06-13 08:56:14'),
-(2, 1, '2', '2', '2020-06-13 08:56:14', '2020-06-13 08:56:14'),
-(3, 1, '3', '3', '2020-06-13 08:56:14', '2020-06-13 08:56:14');
+INSERT INTO `product_features` (`id`, `product_id`, `key`, `value`) VALUES
+(1, 1, 1, 1),
+(2, 1, 2, 2),
+(3, 1, 3, 3);
 
 -- --------------------------------------------------------
 
@@ -214,29 +269,27 @@ INSERT INTO `product_features` (`id`, `product_id`, `key`, `value`, `created_at`
 CREATE TABLE `product_specifications` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `product_id` bigint(20) UNSIGNED NOT NULL,
-  `key` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `value` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `key` bigint(20) UNSIGNED NOT NULL,
+  `value` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `product_specifications`
 --
 
-INSERT INTO `product_specifications` (`id`, `product_id`, `key`, `value`, `created_at`, `updated_at`) VALUES
-(1, 1, '1', '1', '2020-06-13 08:54:45', '2020-06-13 08:54:45'),
-(3, 1, '2', '2', '2020-06-13 08:54:45', '2020-06-13 08:54:45'),
-(4, 1, '3', '3', '2020-06-13 08:54:45', '2020-06-13 08:54:45'),
-(5, 1, '4', '4', '2020-06-13 08:54:45', '2020-06-13 08:54:45'),
-(7, 1, '5', '5', '2020-06-13 08:54:45', '2020-06-13 08:54:45'),
-(8, 1, '6', '6', '2020-06-13 08:54:45', '2020-06-13 08:54:45'),
-(9, 1, '7', '7', '2020-06-13 08:54:45', '2020-06-13 08:54:45'),
-(10, 1, '8', '8', '2020-06-13 08:54:45', '2020-06-13 08:54:45'),
-(11, 1, '9', '9', '2020-06-13 08:54:45', '2020-06-13 08:54:45'),
-(12, 1, '10', '10', '2020-06-13 08:54:45', '2020-06-13 08:54:45'),
-(13, 1, '11', '11', '2020-06-13 08:54:45', '2020-06-13 08:54:45'),
-(17, 1, '12', '12', '2020-06-13 08:54:45', '2020-06-13 08:54:45');
+INSERT INTO `product_specifications` (`id`, `product_id`, `key`, `value`) VALUES
+(1, 1, 1, 1),
+(3, 1, 2, 2),
+(4, 1, 3, 3),
+(5, 1, 4, 4),
+(7, 1, 5, 5),
+(8, 1, 6, 6),
+(9, 1, 7, 7),
+(10, 1, 8, 8),
+(11, 1, 9, 9),
+(12, 1, 10, 10),
+(13, 1, 11, 11),
+(17, 1, 12, 12);
 
 -- --------------------------------------------------------
 
@@ -246,28 +299,26 @@ INSERT INTO `product_specifications` (`id`, `product_id`, `key`, `value`, `creat
 
 CREATE TABLE `specifications` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `specifications`
 --
 
-INSERT INTO `specifications` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'Brand', '2020-06-13 08:55:05', '2020-06-13 08:55:05'),
-(2, 'Model Number', '2020-06-13 08:55:05', '2020-06-13 08:55:05'),
-(3, 'Type', '2020-06-13 08:55:05', '2020-06-13 08:55:05'),
-(4, 'Blade Material', '2020-06-13 08:55:05', '2020-06-13 08:55:05'),
-(5, 'Color', '2020-06-13 08:55:05', '2020-06-13 08:55:05'),
-(6, 'Trimming Range', '2020-06-13 08:55:05', '2020-06-13 08:55:05'),
-(7, 'Water Resistant', '2020-06-13 08:55:05', '2020-06-13 08:55:05'),
-(8, 'Washable Head', '2020-06-13 08:55:05', '2020-06-13 08:55:05'),
-(9, 'Features', '2020-06-13 08:55:05', '2020-06-13 08:55:05'),
-(10, 'Suitable For', '2020-06-13 08:55:05', '2020-06-13 08:55:05'),
-(11, 'Charging Time', '2020-06-13 08:55:05', '2020-06-13 08:55:05'),
-(12, 'Type', '2020-06-13 08:55:05', '2020-06-13 08:55:05');
+INSERT INTO `specifications` (`id`, `name`) VALUES
+(1, 'Brand'),
+(2, 'Model Number'),
+(3, 'Type'),
+(4, 'Blade Material'),
+(5, 'Color'),
+(6, 'Trimming Range'),
+(7, 'Water Resistant'),
+(8, 'Washable Head'),
+(9, 'Features'),
+(10, 'Suitable For'),
+(11, 'Charging Time'),
+(12, 'Type');
 
 -- --------------------------------------------------------
 
@@ -278,28 +329,26 @@ INSERT INTO `specifications` (`id`, `name`, `created_at`, `updated_at`) VALUES
 CREATE TABLE `specification_values` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `specification_id` bigint(20) UNSIGNED NOT NULL,
-  `value` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `value` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `specification_values`
 --
 
-INSERT INTO `specification_values` (`id`, `specification_id`, `value`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Nova', '2020-06-13 08:55:17', '2020-06-13 08:55:17'),
-(2, 2, 'Prime Series NHT 1090 Turbo Power', '2020-06-13 08:55:17', '2020-06-13 08:55:17'),
-(3, 3, 'Cordless', '2020-06-13 08:55:17', '2020-06-13 08:55:17'),
-(4, 4, 'Titanium Coated', '2020-06-13 08:55:17', '2020-06-13 08:55:17'),
-(5, 5, 'Black', '2020-06-13 08:55:17', '2020-06-13 08:55:17'),
-(6, 6, '0.25 - 9 mm', '2020-06-13 08:55:17', '2020-06-13 08:55:17'),
-(7, 7, 'Yes', '2020-06-13 08:55:17', '2020-06-13 08:55:17'),
-(8, 8, 'Yes', '2020-06-13 08:55:17', '2020-06-13 08:55:17'),
-(9, 9, 'Rechargeable, Easy to Clean', '2020-06-13 08:55:17', '2020-06-13 08:55:17'),
-(10, 10, 'Body Grooming, Beard & Moustache', '2020-06-13 08:55:17', '2020-06-13 08:55:17'),
-(11, 11, '120 Min', '2020-06-13 08:55:17', '2020-06-13 08:55:17'),
-(12, 12, 'Cordless', '2020-06-13 08:55:17', '2020-06-13 08:55:17');
+INSERT INTO `specification_values` (`id`, `specification_id`, `value`) VALUES
+(1, 1, 'Nova'),
+(2, 2, 'Prime Series NHT 1090 Turbo Power'),
+(3, 3, 'Cordless'),
+(4, 4, 'Titanium Coated'),
+(5, 5, 'Black'),
+(6, 6, '0.25 - 9 mm'),
+(7, 7, 'Yes'),
+(8, 8, 'Yes'),
+(9, 9, 'Rechargeable, Easy to Clean'),
+(10, 10, 'Body Grooming, Beard & Moustache'),
+(11, 11, '120 Min'),
+(12, 12, 'Cordless');
 
 -- --------------------------------------------------------
 
@@ -326,11 +375,25 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `image`, `email`, `mobile`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Vijendra Maurya', 'uploads/1592031004.jpg', 'vijendra3582@gmail.com', '7532943952', NULL, '$2y$10$awZJIvYp/0/Ws7KNPRcKfec/LMYlITai1qG4VU11ZLONNPqfs8sNG', NULL, '2020-06-13 13:50:05', '2020-06-13 13:50:05'),
-(2, 'Shubh', 'uploads/1592045134.jpg', 'shubhansh@gmail.com', '8876898989', NULL, '$2y$10$/jL4thJazmT4gpcEFKDWZ.k6hGOAENrdYEZuRiIDB0QhYgP/b6faq', NULL, '2020-06-13 17:45:35', '2020-06-13 17:45:35');
+(2, 'Shubh', 'uploads/1592045134.jpg', 'shubhansh@gmail.com', '8876898989', NULL, '$2y$10$/jL4thJazmT4gpcEFKDWZ.k6hGOAENrdYEZuRiIDB0QhYgP/b6faq', NULL, '2020-06-13 17:45:35', '2020-06-13 17:45:35'),
+(3, 'Rahul', 'uploads/1592113656.png', 'rahul@gmail.com', '7532943951', NULL, '$2y$10$wVdQ37LR1T4xYyKzLfaR5.fqgZlHkDKSpTu0cBtCpX/t.zuASiWvO', NULL, '2020-06-14 12:47:36', '2020-06-14 12:47:36');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `attributes`
+--
+ALTER TABLE `attributes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `attribute_values`
+--
+ALTER TABLE `attribute_values`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `attribute_values_attribute_id_foreign` (`attribute_id`);
 
 --
 -- Indexes for table `categories`
@@ -377,6 +440,13 @@ ALTER TABLE `products`
   ADD KEY `products_category_id_foreign` (`category_id`);
 
 --
+-- Indexes for table `product_attributes`
+--
+ALTER TABLE `product_attributes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_attributes_product_id_foreign` (`product_id`);
+
+--
 -- Indexes for table `product_features`
 --
 ALTER TABLE `product_features`
@@ -416,6 +486,18 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `attributes`
+--
+ALTER TABLE `attributes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `attribute_values`
+--
+ALTER TABLE `attribute_values`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
@@ -443,12 +525,18 @@ ALTER TABLE `feature_values`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `product_attributes`
+--
+ALTER TABLE `product_attributes`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
@@ -479,7 +567,7 @@ ALTER TABLE `specification_values`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

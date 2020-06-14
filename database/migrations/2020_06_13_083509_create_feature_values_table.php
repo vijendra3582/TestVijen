@@ -17,7 +17,6 @@ class CreateFeatureValuesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('feature_id');
             $table->string('value');
-            $table->timestamps();
             $table->foreign('feature_id')->references('id')->on('features')->onDelete('cascade');
         });
     }

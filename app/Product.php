@@ -8,41 +8,36 @@ class Product extends Model
     protected $table = "products";
     
     public function getProducts($request = []){
+        //Initiate self class query
         $query = self::query();
-        $query->distinct('products.id');
         $query->select('products.*');
-        if(isset($request['query']) && !empty($request['query'])){
-            $search = $request['query'];
-            $query->where('title', 'LIKE', "%$search%");
-        }
         
-        if(isset($request['price_from']) && !empty($request['price_from']) && isset($request['price_to']) && !empty($request['price_to'])){
-            $price_from = $request['price_from'];
-            $price_to = $request['price_to'];
-            $query->whereBetween('price', [$price_from, $price_to]);
-        }
-        
-        $query->join('product_specifications as specification','specification.product_id',  '=', 'products.id');
-        
-        $specKey = [];
-        $specValue = [];
-        
+        //If user choose specification to filter product
         if(isset($request['specification']) && !empty($request['specification'])){
+            
+            //Iterate all specification
             foreach($request['specification'] as $key => $spec){
+                
+                 //If specification has a value
                 if(!empty($spec)){ 
-                    $specKey[] = $key; 
-                    $specValue[] = $spec; 
+                    $keyValue['key'] = $key;
+                    $keyValue['spec'] = $spec;
+                    
+                    //Check specification filter
+                    $query->whereHas('specification', function ($queryIN) use ($keyValue) {
+                    $queryIN->where('key', $keyValue['key'])
+                        ->where('value', $keyValue['spec']);
+                    });
                 }
             }
-          
-            if($specValue){            
-                $query->whereIn('specification.key', $specKey);   
-                $query->whereIn('specification.value', $specValue);
-            }
         }
         
+        
         // $sql = Str::replaceArray('?', $query->getBindings(), $query->toSql());
-        $result = $query->with(['category', 'specification', 'feature'])->get();
+        
+        //Get product data with category , specification, feature and attributes
+        $result = $query->with(['category', 'specification', 'feature', 'attribute'])->get();
+        
         return $result;
     }
     
@@ -59,5 +54,10 @@ class Product extends Model
     public function feature()
     {
         return $this->hasMany(ProductFeature::class);
+    }
+    
+    public function attribute()
+    {
+        return $this->hasMany(ProductAttribute::class);
     }
 }

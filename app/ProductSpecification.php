@@ -14,6 +14,6 @@ class ProductSpecification extends Model
     }
     
     public function specificationValue(){
-        return $this->belongsTo(SpecificationValue::class, 'key', 'id');
+        return $this->belongsTo(SpecificationValue::class, 'value', 'id');
     }
 }

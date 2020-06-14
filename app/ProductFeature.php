@@ -13,6 +13,6 @@ class ProductFeature extends Model
     }
     
     public function featureValue(){
-        return $this->belongsTo(FeatureValue::class, 'key', 'id');
+        return $this->belongsTo(FeatureValue::class, 'value', 'id');
     }
 }

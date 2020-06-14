@@ -27,7 +27,7 @@ class UserInsertRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'mobile' => ['required', 'numeric', 'digits:10'],
+            'mobile' => ['required', 'numeric', 'digits:10', 'unique:users'],
             'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg|max:2048']
         ];
     }

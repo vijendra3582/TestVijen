@@ -42,7 +42,16 @@
             .title {
                 font-size: 84px;
             }
-
+            
+            .links {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 52px;
+                border-bottom: 2px solid;
+                margin-bottom: 1rem;
+            }
+            
             .links > a {
                 color: #636b6f;
                 padding: 0 25px;
@@ -219,6 +228,11 @@
         </style>
     </head>
     <body>
+        <div class="links">
+            <a href="{{ route('task-one') }}" target="_blank">Task One</a>
+            <a href="{{ route('task-two') }}" target="_blank">Task Two</a>
+            <a href="{{ route('task-three') }}" target="_blank">Task Three</a>
+        </div>
         <div class="flex-center position-ref full-height">
         <div class="content">
             @yield('content')

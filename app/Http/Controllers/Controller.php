@@ -36,9 +36,14 @@ class Controller extends BaseController
     }
     
     public function createUser(UserInsertRequest $request){
+        
+        //Generate image name
         $imageName = time().'.'.$request->image->getClientOriginalExtension();
+        
+        //Save image to public/uploads folder
         $request->image->move(public_path('/uploads'), $imageName);
         
+        //Save data to user table
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -57,11 +62,16 @@ class Controller extends BaseController
     }
     
     public function taskThree(){
+        
+        //Initiate product object
         $product = new Product;
-        $features = Feature::with('featureValue')->get();
+        
+        //Get specifications for filter products
         $specifications = Specification::with('specificationValue')->get();
+        
+        //Get filtered products
         $products = $product->getProducts($_GET);
-        return view('products')->with('products', $products)->with('features', $features)->with('specifications', $specifications);
+        return view('products')->with('products', $products)->with('specifications', $specifications);
     }
     
     private function makeTree(array &$array, $parent_id = 0) {

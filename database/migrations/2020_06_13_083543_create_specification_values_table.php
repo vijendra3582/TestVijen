@@ -17,7 +17,6 @@ class CreateSpecificationValuesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('specification_id');
             $table->string('value');
-            $table->timestamps();
             $table->foreign('specification_id')->references('id')->on('specifications')->onDelete('cascade');
         });
     }
